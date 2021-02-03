@@ -9,20 +9,27 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var toDoItems =
-        [ToDoItem(priority: "High", description: "Take Out Trash", dueDate: Date()),
-         ToDoItem(priority: "Medium", description: "Pick Up Clothes", dueDate: Date()),
-         ToDoItem(priority: "Low", description: "Eat a donut", dueDate: Date())]
+    @ObservedObject var toDoItems: ToDoList
+    
     var body: some View {
         NavigationView {
             List {
-                ForEach(toDoItems) {item in Text(item.description)
+                ForEach(toDoItems.items) {item in
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text(item.priority)
+                                .font(.headline)
+                            Text(item.description)
+                        }
+                        Spacer()
+                        Text(item.dueDate, style: .date)
+                    }
                 }
                 .onMove(perform: { indices, newOffset in
-                    toDoItems.move(fromOffsets: indices, toOffset: newOffset)
+                    toDoItems.items.move(fromOffsets: indices, toOffset: newOffset)
                 })
                 .onDelete(perform: { indexSet in
-                    toDoItems.remove(atOffsets: indexSet)
+                    toDoItems.items.remove(atOffsets: indexSet)
                 })
             }
             .navigationBarTitle("Things")
@@ -43,5 +50,6 @@ struct ToDoItem: Identifiable {
     var description = String()
     var dueDate = Date()
 }
+
 
 
