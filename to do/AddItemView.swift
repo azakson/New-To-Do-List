@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct AddItemView: View {
-    @ObservedObject var toDoItems: ToDoList
+    
+    @ObservedObject var toDoList: ToDoList
     @State private var priority = ""
     @State private var description = ""
     @State private var dueDate = Date()
@@ -21,19 +22,28 @@ struct AddItemView: View {
                 Picker("Priority",  selection: $priority) {
                     ForEach(Self.priorities, id: \.self) { priority in
                         Text(priority)
-                        
                     }
                 }
                 TextField("Description", text: $description)
                 DatePicker("Due Date", selection: $dueDate, displayedComponents: .date)
             }
             .navigationBarTitle("Add New To-Do Item")
+            .navigationBarItems(trailing: Button("Save") {
+                if(priority.count > 0 && description.count > 0) {
+                    let item = ToDoItem(id: UUID(),
+                                        priority: priority,
+                                        description: description,
+                                        dueDate: dueDate)
+                    toDoList.items.append(item)
+                    presentationMode.wrappedValue.dismiss()
+                }
+            })
         }
     }
 }
 
 struct AddItemView_Previews: PreviewProvider {
     static var previews: some View {
-        AddItemView(toDoItems: ToDoList())
+        AddItemView(toDoList: ToDoList())
     }
 }
