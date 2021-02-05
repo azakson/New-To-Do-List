@@ -79,7 +79,6 @@
 		58B71C6D25C470A900644A1B = {
 			isa = PBXGroup;
 			children = (
-				583E7AE125C86949007A23B3 /* ToDoList.swift */,
 				58B71C7825C470AA00644A1B /* to do */,
 				58B71C8A25C470B700644A1B /* to doTests */,
 				58B71C9525C470B700644A1B /* to doUITests */,
@@ -103,6 +102,7 @@
 				58B71C7925C470AA00644A1B /* to_doApp.swift */,
 				58B71C7B25C470AA00644A1B /* ContentView.swift */,
 				58CD1EA025C9B283000B9AF2 /* AddItemView.swift */,
+				583E7AE125C86949007A23B3 /* ToDoList.swift */,
 				58B71C7D25C470B600644A1B /* Assets.xcassets */,
 				58B71C8225C470B600644A1B /* Info.plist */,
 				58B71C7F25C470B600644A1B /* Preview Content */,
